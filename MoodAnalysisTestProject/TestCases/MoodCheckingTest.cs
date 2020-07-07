@@ -16,9 +16,21 @@ namespace MoodAnalysisTestProject
         }
 
         [Test]
-        public void Test1()
+        public void Test_For_Sad_Mood_Test()
         {
-           
+            string message = "I Am So Sad ";
+            string currentMood = "SAD";
+            string result = analyser.AnalyseMood(message);
+            Assert.AreEqual(currentMood, result);
+        }
+
+        [Test]
+        public void Test_For_Happy_Mood_Test()
+        {
+            string message = "I Am So Happy";
+            string currentMood = "HAPPY";
+            string result = analyser.AnalyseMood(message);
+            Assert.AreEqual(currentMood, result);
         }
     }
 }
