@@ -32,5 +32,18 @@ namespace MoodAnalysisTestProject
             string result = analyser.AnalyseMood(message);
             Assert.AreEqual(currentMood, result);
         }
+
+        [Test]
+        public void Test_For_Empty_Message_Test()
+        {
+            try
+            {
+                string result = analyser.AnalyseMood("");
+            }
+            catch (MoodAnalyserException e)
+            {
+                Assert.AreEqual(MoodAnalyserException.TypeOfException.EMPTY_STRING_EXCEPTION, e.exceptionType);
+            }
+        }
     }
 }
