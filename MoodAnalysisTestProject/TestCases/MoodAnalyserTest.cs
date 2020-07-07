@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace MoodAnalysisTestProject
 {
-    public class MoodCheckingTest
+    public class MoodAnalyserTest
     {
         MoodAnalyser analyser;
         [OneTimeSetUp]
