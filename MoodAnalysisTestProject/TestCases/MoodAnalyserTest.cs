@@ -1,64 +1,89 @@
-using MoodAnalysis;
-using MoodAnalysis.FactoryPattern;
-using NUnit.Framework;
-using System;
-using System.Reflection;
+// <copyright file="MoodAnalyserTest.cs" company="Bridgelabz">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace MoodAnalysisTestProject
 {
+    using System.Reflection;
+    using MoodAnalysis;
+    using MoodAnalysis.FactoryPattern;
+    using NUnit.Framework;
+
+    /// <summary>
+    /// MoodAnalyser test class.
+    /// </summary>
     public class MoodAnalyserTest
     {
-        MoodAnalyser analyser;
+        private MoodAnalyser analyser;
+
+        /// <summary>
+        /// Set up.
+        /// </summary>
         [OneTimeSetUp]
         public void Setup()
         {
-            analyser = new MoodAnalyser();
+            this.analyser = new MoodAnalyser();
         }
 
-        [Test]
-        public void Test_For_Sad_Mood_Test()
-        {
-            string message = "I Am So Sad ";
-            string currentMood = "SAD";
-            string result = analyser.AnalyseMood(message);
-            Assert.AreEqual(currentMood, result);
-        }
-
+        /// <summary>
+        /// Test case to check happy mood.
+        /// </summary>
         [Test]
         public void Test_For_Happy_Mood_Test()
         {
             string message = "I Am So Happy";
             string currentMood = "HAPPY";
-            string result = analyser.AnalyseMood(message);
+            string result = this.analyser.AnalyseMood(message);
             Assert.AreEqual(currentMood, result);
         }
 
+        /// <summary>
+        /// Test case to check sad mood.
+        /// </summary>
+        [Test]
+        public void Test_For_Sad_Mood_Test()
+        {
+            string message = "I Am So Sad ";
+            string currentMood = "SAD";
+            string result = this.analyser.AnalyseMood(message);
+            Assert.AreEqual(currentMood, result);
+        }
+
+        /// <summary>
+        /// Test case to check null response.
+        /// </summary>
         [Test]
         public void Test_For_Null_Response_Test()
         {
             try
             {
-                string result = analyser.AnalyseMood(null);
+                string result = this.analyser.AnalyseMood(null);
             }
             catch (MoodAnalyserException e)
             {
-                Assert.AreEqual(MoodAnalyserException.TypeOfException.NULL_POINTER_EXCEPTION, e.exceptionType);
+                Assert.AreEqual(MoodAnalyserException.TypeOfException.NULL_POINTER_EXCEPTION, e.ExceptionType);
             }
         }
 
+        /// <summary>
+        /// Test for empty message .
+        /// </summary>
         [Test]
         public void Test_For_Empty_Message_Test()
         {
             try
             {
-                string result = analyser.AnalyseMood("");
+                string result = this.analyser.AnalyseMood(string.Empty);
             }
             catch (MoodAnalyserException e)
             {
-                Assert.AreEqual(MoodAnalyserException.TypeOfException.EMPTY_STRING_EXCEPTION, e.exceptionType);
+                Assert.AreEqual(MoodAnalyserException.TypeOfException.EMPTY_STRING_EXCEPTION, e.ExceptionType);
             }
         }
 
+        /// <summary>
+        /// Test case to check constructor.
+        /// </summary>
         [Test]
         public void Mood_Analyser_Contructor_Checker_Test()
         {
@@ -69,6 +94,9 @@ namespace MoodAnalysisTestProject
             Assert.IsInstanceOf(typeof(MoodAnalyser), instanceOfClass);
         }
 
+        /// <summary>
+        /// Test case to check Improper class name.
+        /// </summary>
         [Test]
         public void Improper_Class_Haandeling_Test()
         {
@@ -81,10 +109,13 @@ namespace MoodAnalysisTestProject
             }
             catch (MoodAnalyserException e)
             {
-                Assert.AreEqual(MoodAnalyserException.TypeOfException.NO_CLASS_FOUND, e.exceptionType);
+                Assert.AreEqual(MoodAnalyserException.TypeOfException.NO_CLASS_FOUND, e.ExceptionType);
             }
         }
 
+        /// <summary>
+        /// Test case to check improper constructor handling.
+        /// </summary>
         [Test]
         public void Improper_Constructor_Haandeling_Test()
         {
@@ -98,22 +129,27 @@ namespace MoodAnalysisTestProject
             }
             catch (MoodAnalyserException e)
             {
-                Assert.AreEqual(MoodAnalyserException.TypeOfException.NO_CONSTRUCTOR_FOUND, e.exceptionType);
+                Assert.AreEqual(MoodAnalyserException.TypeOfException.NO_CONSTRUCTOR_FOUND, e.ExceptionType);
             }
         }
 
+        /// <summary>
+        /// Test case to check parameterised constructor.
+        /// </summary>
         [Test]
         public void Mood_Analyser_Parameterised_Constructor_Check_Test()
         {
             string message = "here i am in sad mood";
             string className = "MoodAnalyser";
-            MoodAnalyser analysis = new MoodAnalyser(message);
             MoodAnalyserFactory<MoodAnalyser> factory = new MoodAnalyserFactory<MoodAnalyser>();
             ConstructorInfo constrInfo = factory.ConstructorCreator(1);
             object instanceOfClass = factory.InstanceCreator(className, constrInfo, message);
             Assert.IsInstanceOf(typeof(MoodAnalyser), instanceOfClass);
         }
 
+        /// <summary>
+        /// Test case to check improper name for parameterised constructor.
+        /// </summary>
         [Test]
         public void Improper_Class_Name_For_Parametersed_Constructor_Test()
         {
@@ -128,10 +164,13 @@ namespace MoodAnalysisTestProject
             }
             catch (MoodAnalyserException e)
             {
-                Assert.AreEqual(MoodAnalyserException.TypeOfException.NO_CLASS_FOUND, e.exceptionType);
+                Assert.AreEqual(MoodAnalyserException.TypeOfException.NO_CLASS_FOUND, e.ExceptionType);
             }
         }
 
+        /// <summary>
+        /// Test case to check improper parameterised constructor.
+        /// </summary>
         [Test]
         public void Improper_Constructor_For_Parameterised_Constructor_Test()
         {
@@ -147,18 +186,24 @@ namespace MoodAnalysisTestProject
             }
             catch (MoodAnalyserException e)
             {
-                Assert.AreEqual(MoodAnalyserException.TypeOfException.NO_CONSTRUCTOR_FOUND, e.exceptionType);
+                Assert.AreEqual(MoodAnalyserException.TypeOfException.NO_CONSTRUCTOR_FOUND, e.ExceptionType);
             }
         }
 
+        /// <summary>
+        /// Test case to check call method using reflection.
+        /// </summary>
         [Test]
         public void Call_Method_Using_Reflection_Test()
         {
-
             MoodAnalyserFactory<MoodAnalyser> factory = new MoodAnalyserFactory<MoodAnalyser>();
             bool checker = factory.InvokeMethods("AnalyseMood", "Happy");
             Assert.AreEqual(true, checker);
         }
+
+        /// <summary>
+        /// Test case to check improper method Exception.
+        /// </summary>
         [Test]
         public void Improper_Method_Should_Throw_Exception()
         {
@@ -170,11 +215,13 @@ namespace MoodAnalysisTestProject
             }
             catch (MoodAnalyserException e)
             {
-                Assert.AreEqual(MoodAnalyserException.TypeOfException.NO_METHOD_FOUND, e.exceptionType);
+                Assert.AreEqual(MoodAnalyserException.TypeOfException.NO_METHOD_FOUND, e.ExceptionType);
             }
-
         }
 
+        /// <summary>
+        /// Test case for dynamic mood change.
+        /// </summary>
         [Test]
         public void Change_Mood_Dynamically()
         {
@@ -183,6 +230,9 @@ namespace MoodAnalysisTestProject
             Assert.AreEqual("HAPPY", result);
         }
 
+        /// <summary>
+        /// Test case to check null value.
+        /// </summary>
         [Test]
         public void Null_Value_Should_Throw_Exception()
         {
@@ -194,7 +244,7 @@ namespace MoodAnalysisTestProject
             }
             catch (MoodAnalyserException e)
             {
-                Assert.AreEqual(MoodAnalyserException.TypeOfException.NULL_POINTER_EXCEPTION, e.exceptionType);
+                Assert.AreEqual(MoodAnalyserException.TypeOfException.NULL_POINTER_EXCEPTION, e.ExceptionType);
             }
         }
     }
