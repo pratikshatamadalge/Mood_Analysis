@@ -38,7 +38,7 @@ namespace MoodAnalysis.FactoryPattern
         /// <summary>
         /// Method to get info of parameterized constructor.
         /// </summary>
-        /// <param name="className">passing classname as string. type</param>
+        /// <param name="className">passing classname as string type.</param>
         /// <returns>Reflection constructor Info.</returns>
         public ConstructorInfo ConstructorCreator(string className)
         {
@@ -85,8 +85,8 @@ namespace MoodAnalysis.FactoryPattern
         /// Method to create instance at Runtime.
         /// </summary>
         /// <param name="className">Passing className as string.</param>
-        /// <param name="constructor">ConstructorInfo</param>
-        /// <returns></returns>
+        /// <param name="constructor">ConstructorInfo.</param>
+        /// <returns>Object of class.</returns>
         public object InstanceCreator(string className, ConstructorInfo constructor)
         {
             try
@@ -143,7 +143,7 @@ namespace MoodAnalysis.FactoryPattern
         /// <summary>
         /// Invoke method at runtime using reflection.
         /// </summary>
-        /// <param name="method_name">Passing method name as string which we want to invoke</param>
+        /// <param name="method_name">Passing method name as string which we want to invoke.</param>
         /// <param name="message">Passing message as string.</param>
         /// <returns>Returns true or false.</returns>
         public bool InvokeMethods(string method_name, string message)

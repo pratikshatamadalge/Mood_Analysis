@@ -155,7 +155,7 @@ namespace MoodAnalysisTestProject
         {
             try
             {
-                string message = "here i am in happy mood";
+                string message = "i am in happy mood";
                 string imProperClassName = "Mood";
                 MoodAnalyser analysis = new MoodAnalyser(message);
                 MoodAnalyserFactory<MoodAnalyser> factory = new MoodAnalyserFactory<MoodAnalyser>();
@@ -176,7 +176,7 @@ namespace MoodAnalysisTestProject
         {
             try
             {
-                string message = "here i am in happy mood";
+                string message = "i am in happy mood";
                 string className = "MoodAnalyser";
                 string imProperConstructor = "MoodAnalysis.MoodAnalyser";
                 MoodAnalyser analysis = new MoodAnalyser(message);
